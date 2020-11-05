@@ -110,7 +110,7 @@ storm ui
 ```
 
 After running these, open [http://localhost:8080/](http://localhost:8080/) in the browser and if you can see following screen, your Storm is running.
-https://github.com/sps![strom running window](https://github.com/spsaroj/storm-demo/blob/main/Screenshot%20(43).png)
+![stromrunningwindow](https://github.com/spsaroj/storm-demo/blob/main/Screenshot%20(43).png)
 
 ### Jing Li
 Start typing here
