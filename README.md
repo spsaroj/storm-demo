@@ -6,7 +6,7 @@
  * [Jing Li](https://github.com/JingLi521864)
  
  **Sub Topic (subject to change)**
- * Sagar - I will do the demonstartion on worker node. 
+ * Sagar - I will do the demonstartion on spouts. 
  * Susan - Demonstrate Installation and set up process.
- * Saroj - I will do demonstration on Bolt.
+ * Saroj - I will do demonstration on master node.
  * Jing - Demonstrate Architecture of Storm
