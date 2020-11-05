@@ -14,7 +14,7 @@
 ### Susan Maharjan
 ## How to install and run Storm:  
 ### Pre-requisites  
-1. Python
+1. Anaconda3
 
 1. Java
 
@@ -25,7 +25,7 @@
 ### Install pre-requisites 
 I have used chocolatey to install Anaconda3 Java and Maven
 
-Python  
+Anaconda3  
 ```choco install anaconda3 -y```
 
 Java
