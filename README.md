@@ -114,22 +114,34 @@ After running these, open [http://localhost:8080/](http://localhost:8080/) in th
 
 ### Jing Li
 ## Apache Storm: Architecture
-```
+
 Apache Storm is a distributed realtime computation system. Similar to how Hadoop provides a set of general primitives for doing batch processing, Storm provides a set of general primitives for doing the realtime computation. Storm is simple, can be used with any programming language, is used by many companies, and is a lot of fun to use!
-```
+
 
 #### Apache Storm master node 
 Nimbus is a master node of Storm cluster. All other nodes in the cluster are called as worker nodes. Master node is responsible for distributing data among all the worker nodes, assign tasks to worker nodes and monitoring failures.
+
+Command:
+
 ```storm nimbus```
+
+Results:
 ![stormnimbus](https://github.com/spsaroj/storm-demo/blob/main/storm_nimbus.png)
 
 
 #### Apache Storm worker node
 The nodes that follow instructions given by the nimbus are called as Supervisors. A supervisor has multiple worker processes and it governs worker processes to complete the tasks assigned by the nimbus.
+
+Command:
+
 ```storm supervisors```
+
+Results:
 ![stormsup](https://github.com/spsaroj/storm-demo/blob/main/storm_sup.png)
 
 #### Apache Storm UI Results
+Command:
+
 ```storm ui```
 ![stormui](https://github.com/spsaroj/storm-demo/blob/main/storm_ui.png)
 
