@@ -17,8 +17,9 @@ import backtype.storm.tuple.Values;
 import backtype.storm.utils.Utils;
 
 import java.util.Map;
+import java.util.HashMap;
 
-public static class WordCount extends BaseBasicBolt {
+public class WordCountBolt extends BaseBasicBolt {
     Map<String, Integer> counts = new HashMap<String, Integer>();
 
     @Override

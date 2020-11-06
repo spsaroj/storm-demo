@@ -18,7 +18,7 @@ import backtype.storm.utils.Utils;
 
 import java.util.Map;
 
-public static class SplitSentence extends BaseBasicBolt {
+public class SplitBolt extends BaseBasicBolt {
     @Override
     public void declareOutputFields(OutputFieldsDeclarer declarer) {
       declarer.declare(new Fields("word"));

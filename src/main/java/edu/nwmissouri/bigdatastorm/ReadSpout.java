@@ -1,3 +1,5 @@
+package edu.nwmissouri.bigdatastorm;
+
 import backtype.storm.spout.SpoutOutputCollector;
 import backtype.storm.task.TopologyContext;
 import backtype.storm.topology.OutputFieldsDeclarer;
@@ -8,39 +10,29 @@ import backtype.storm.utils.Utils;
 import java.util.Map;
 import java.util.Random;
 
-package edu.nwmissouri.bigdatastorm;
-
 public class ReadSpout extends BaseRichSpout {
-    SpoutOutputCollector _collector;
-    Random _rand;
-  
-  
-    @Override
-    public void open(Map conf, TopologyContext context, SpoutOutputCollector collector) {
-      _collector = collector;
-      _rand = new Random();
-    }
-  
-    @Override
-    public void nextTuple() {
-      Utils.sleep(100);
-      String[] sentences = new String[]{ "the cow jumped over the moon", "an apple a day keeps the doctor away",
-          "four score and seven years ago", "snow white and the seven dwarfs", "i am at two with nature" };
-      String sentence = sentences[_rand.nextInt(sentences.length)];
-      _collector.emit(new Values(sentence));
-    }
-  
-    @Override                                           
-    public void ack(Object id) {
-    }
-  
-    @Override
-    public void fail(Object id) {
-    }
-  
-    @Override
-    public void declareOutputFields(OutputFieldsDeclarer declarer) {
-      declarer.declare(new Fields("word"));
-    }
-  
-  }
+	private SpoutOutputCollector collector;
+	private String[] sentences = {
+			"my dog has fleas",
+			"i like cold beverages",
+			"the dog ate my homework",
+			"don't have a cow man",
+			"i don't think i like fleas"
+	};
+	private int index = 0;
+	public void declareOutputFields(OutputFieldsDeclarer declarer) {
+		declarer.declare(new Fields("sentence"));
+	}
+	public void open(Map config, TopologyContext context,
+			SpoutOutputCollector collector) {
+		this.collector = collector;
+	}
+	public void nextTuple() {
+		this.collector.emit(new Values(sentences[index]));
+		index++;
+		if (index >= sentences.length) {
+			index = 0;
+		}
+	}
+}
+
