@@ -19,22 +19,25 @@ import backtype.storm.utils.Utils;
 import java.util.Map;
 import java.util.HashMap;
 
-public class WordCountBolt extends BaseBasicBolt {
-    Map<String, Integer> counts = new HashMap<String, Integer>();
-
-    @Override
-    public void execute(Tuple tuple, BasicOutputCollector collector) {
-      String word = tuple.getString(0);
-      Integer count = counts.get(word);
-      if (count == null)
-        count = 0;
-      count++;
-      counts.put(word, count);
-      collector.emit(new Values(word, count));
-    }
-
-    @Override
-    public void declareOutputFields(OutputFieldsDeclarer declarer) {
-      declarer.declare(new Fields("word", "count"));
-    }
+public class WordCountBolt extends BaseRichBolt{
+	private OutputCollector collector;
+	private HashMap<String, Long> counts = null;
+	public void prepare(Map config, TopologyContext context,
+			OutputCollector collector) {
+		this.collector = collector;
+		this.counts = new HashMap<String, Long>();
+	}
+	public void execute(Tuple tuple) {
+		String word = tuple.getStringByField("word");
+		Long count = this.counts.get(word);
+		if(count == null){
+			count = 0L;
+		}
+		count++;
+		this.counts.put(word, count);
+		this.collector.emit(new Values(word, count));
+	}
+	public void declareOutputFields(OutputFieldsDeclarer declarer) {
+		declarer.declare(new Fields("word", "count"));
+	}
 }

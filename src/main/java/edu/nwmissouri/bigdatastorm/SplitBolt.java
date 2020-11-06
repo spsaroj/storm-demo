@@ -18,22 +18,20 @@ import backtype.storm.utils.Utils;
 
 import java.util.Map;
 
-public class SplitBolt extends BaseBasicBolt {
-    @Override
-    public void declareOutputFields(OutputFieldsDeclarer declarer) {
-      declarer.declare(new Fields("word"));
-    }
-
-    @Override
-    public Map<String, Object> getComponentConfiguration() {
-      return null;
-    }
-
-    public void execute(Tuple tuple, BasicOutputCollector basicOutputCollector) {
-      String sentence = tuple.getStringByField("sentence");
-      String words[] = sentence.split(" ");
-      for (String w : words) {
-        basicOutputCollector.emit(new Values(w));
-      }
-    }
+public class SplitBolt extends BaseRichBolt{
+	private OutputCollector collector;
+	public void prepare(Map config, TopologyContext context,
+			OutputCollector collector) {
+		this.collector = collector;
+	}
+	public void execute(Tuple tuple) {
+		String sentence = tuple.getStringByField("sentence");
+		String[] words = sentence.split(" ");
+		for(String word : words){
+			this.collector.emit(new Values(word));
+		}
+	}
+	public void declareOutputFields(OutputFieldsDeclarer declarer) {
+		declarer.declare(new Fields("word"));
+	}
 }
