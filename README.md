@@ -8,7 +8,7 @@
  **Sub Topic**
  * Sagar - I will do the demonstartion on spouts. 
  * Susan - Demonstrate Installation and set up process.
- * Saroj - I will do demonstration on Bolts.
+ * Saroj - Demonstrate on Bolts.
  * Jing - Demonstrate Architecture of Storm
 
 ### Susan Maharjan
