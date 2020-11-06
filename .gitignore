@@ -1,4 +1,5 @@
 .lein-repl-history
+/storm-local
 /classes
 /lib
 deploy/lib
