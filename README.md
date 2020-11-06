@@ -12,7 +12,8 @@
  * Jing - Demonstrate Architecture of Storm
 
 ### Susan Maharjan
-## How to install and run Storm:  
+## How to install and run Storm: 
+Click in the [Video Link](https://use.vg/Wea8GO) to watch the video of How to install and run Storm
 ### Pre-requisites  
 1. Anaconda3
 
