@@ -6,7 +6,7 @@
  * [Jing Li](https://github.com/JingLi521864)
  
  **Sub Topic**
- * Sagar - I will do the demonstartion on spouts. 
+ * Sagar - Demonstrate on Spouts and Topology. 
  * Susan - Demonstrate Installation and set up process.
  * Saroj - Demonstrate on Bolts.
  * Jing - Demonstrate Architecture of Storm
