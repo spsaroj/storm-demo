@@ -1,3 +1,19 @@
+import backtype.storm.Config;
+import backtype.storm.LocalCluster;
+import backtype.storm.StormSubmitter;
+import backtype.storm.task.OutputCollector;
+import backtype.storm.task.TopologyContext;
+import backtype.storm.testing.TestWordSpout;
+import backtype.storm.topology.OutputFieldsDeclarer;
+import backtype.storm.topology.TopologyBuilder;
+import backtype.storm.topology.base.BaseRichBolt;
+import backtype.storm.tuple.Fields;
+import backtype.storm.tuple.Tuple;
+import backtype.storm.tuple.Values;
+import backtype.storm.utils.Utils;
+import java.util.HashMap;
+import java.util.Map;
+
 package edu.nwmissouri.bigdatastorm;
 
 public class Topology{
@@ -5,7 +21,7 @@ public class Topology{
         TopologyBuilder builder = new TopologyBuilder();
         builder.setSpout("spout", new ReadSpout(), 5);
         builder.setBolt("split", new SplitBolt(), 8).shuffleGrouping("spout");
-        builder.setBolt("count", new WordCountBolt(), 12).fieldsGrouping("split", new Fields("word"));
+        builder.setBolt("count", new WordCountB(), 12).fieldsGrouping("split", new Fields("word"));
 
         Config conf = new Config();
         conf.setDebug(true);
