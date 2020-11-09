@@ -182,8 +182,10 @@ Example: if you were to do equivalence of map reduce job, you would fetch the da
 
 ## How to run:
 
-Assuming you have zookeeper, nimbus, supervisor and UI running, follow the following steps to run the project:
-```Powershell mvn clean compile assembly:single ``` - This will first clean the project, compiles it and create a target folder with a fat jar file.
+Assuming you have zookeeper, nimbus, supervisor and UI running, follow the following steps to run the project in the root directory:
+```mvn clean compile assembly:single ``` - This will first clean the project, compiles it and create a target folder with a fat jar file.
+
+```storm jar .target/storm-demo-0.0.1-SNAPSHOT-jar-with-dependencies.jar edu.nwmissouri.bigdatastorm.Topology WordCount -c nimbus.host=localhost``` - This will Deploy the Word Count topology to your local cluster with the storm jar command.
 
 
 ## Reference
