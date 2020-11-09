@@ -146,14 +146,39 @@ Command:
 ```storm ui```
 ![stormui](https://github.com/spsaroj/storm-demo/blob/main/storm_ui.png)
 
-## Reference
-- https://www.tutorialspoint.com/apache_storm/apache_storm_cluster_architecture.htm
-- https://blog.knoldus.com/apache-storm-architecture/
-
-
 
 ### Sagar Tiwari
-Start typing here
+After completing all the process above, now lets talk about Spout and Topology.
+
+#### Topology
+A topology is a graph of computation. We use it for realtime computation on Storm.Running a topology is straightforward. First, you package all your code and dependencies into a single jar. Then, run the following code:
+```storm jar all-my-code.jar org.apache.storm.MyTopology arg1 arg2```
+- While making a topology first you have to make a topology builder 
+```TopologyBuilder builder```
+- After the toplogy is created you need to set Spout in that topology
+```builder.setSpout```
+- Then you need to set bolt in that topology
+```builder.setBolt```
+- After you set spout and bolt you need to sumbit the topology
+```submit()```
+- Finnaly you can start the topology 
+``` ConfigurableTopology.start ```
+
+#### Spouts
+A spout is a source of streams in a topology. Generally spouts will read tuples from an external source and emit them into the topology. Spouts can either be reliable or unreliable. Spout also has different methods, such as
+- ```open()``` - It will call a task for this component is initialized within.
+- ```nextTuple()``` - When this method is called. Storm is requesting that the Spout emit tuple to the output collector.
+- ```ack()``` - Storm has determined that the tuple emitted by this Spout with the id identifier has been fully processed.
+- ```fail()``` - The tuple emitted by this Spout with the id identifier has failed to be fully processed.
 
 ### Saroj Paudel
 Start typing here
+
+## Reference
+- https://www.tutorialspoint.com/apache_storm/apache_storm_cluster_architecture.htm
+- https://blog.knoldus.com/apache-storm-architecture/
+- https://storm.apache.org/releases/current/Tutorial.html
+- https://www.youtube.com/watch?v=5kiZs1a8UPM&ab_channel=edureka%21
+
+ 
+
