@@ -1,38 +1,82 @@
 package edu.nwmissouri.bigdatastorm;
 
-import backtype.storm.spout.SpoutOutputCollector;
-import backtype.storm.task.TopologyContext;
-import backtype.storm.topology.OutputFieldsDeclarer;
-import backtype.storm.topology.base.BaseRichSpout;
-import backtype.storm.tuple.Fields;
-import backtype.storm.tuple.Values;
-import backtype.storm.utils.Utils;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Map;
 import java.util.Random;
+import org.apache.storm.spout.SpoutOutputCollector;
+import org.apache.storm.task.TopologyContext;
+import org.apache.storm.topology.OutputFieldsDeclarer;
+import org.apache.storm.topology.base.BaseRichSpout;
+import org.apache.storm.tuple.Fields;
+import org.apache.storm.tuple.Values;
+import org.apache.storm.utils.Utils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class ReadSpout extends BaseRichSpout {
-	private SpoutOutputCollector collector;
-	private String[] sentences = {
-			"my dog has fleas",
-			"i like cold beverages",
-			"the dog ate my homework",
-			"don't have a cow man",
-			"i don't think i like fleas"
-	};
-	private int index = 0;
-	public void declareOutputFields(OutputFieldsDeclarer declarer) {
-		declarer.declare(new Fields("sentence"));
-	}
-	public void open(Map config, TopologyContext context,
-			SpoutOutputCollector collector) {
-		this.collector = collector;
-	}
-	public void nextTuple() {
-		this.collector.emit(new Values(sentences[index]));
-		index++;
-		if (index >= sentences.length) {
-			index = 0;
-		}
-	}
-}
+    private static final Logger LOG = LoggerFactory.getLogger(ReadSpout.class);
 
+    SpoutOutputCollector collector;
+    Random rand;
+
+
+    @Override
+    public void open(Map<String, Object> conf, TopologyContext context, SpoutOutputCollector collector) {
+        this.collector = collector;
+        rand = new Random();
+    }
+
+    @Override
+    public void nextTuple() {
+        Utils.sleep(100);
+        String[] sentences = new String[]{
+            sentence("the cow jumped over the moon"), sentence("an apple a day keeps the doctor away"),
+            sentence("four score and seven years ago"), sentence("snow white and the seven dwarfs"), sentence("i am at two with nature")
+        };
+        final String sentence = sentences[rand.nextInt(sentences.length)];
+
+        LOG.debug("Emitting tuple: {}", sentence);
+
+        collector.emit(new Values(sentence));
+    }
+
+    protected String sentence(String input) {
+        return input;
+    }
+
+    @Override
+    public void ack(Object id) {
+    }
+
+    @Override
+    public void fail(Object id) {
+    }
+
+    @Override
+    public void declareOutputFields(OutputFieldsDeclarer declarer) {
+        declarer.declare(new Fields("word"));
+    }
+
+    // Add unique identifier to each tuple, which is helpful for debugging
+    public static class TimeStamped extends ReadSpout {
+        private final String prefix;
+
+        public TimeStamped() {
+            this("");
+        }
+
+        public TimeStamped(String prefix) {
+            this.prefix = prefix;
+        }
+
+        @Override
+        protected String sentence(String input) {
+            return prefix + currentDate() + " " + input;
+        }
+
+        private String currentDate() {
+            return new SimpleDateFormat("yyyy.MM.dd_HH:mm:ss.SSSSSSSSS").format(new Date());
+        }
+    }
+}
