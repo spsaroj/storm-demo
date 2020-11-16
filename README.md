@@ -148,8 +148,9 @@ Command:
 
 
 ### Sagar Tiwari
-After completing all the process above, now lets talk about Spout and Topology.
 Link to Video :- https://app.vidgrid.com/view/43En4nFy4RNA
+
+After completing all the process above, now lets talk about Spout and Topology.
 
 #### Topology
 A topology is a graph of computation. We use it for realtime computation on Storm.Running a topology is straightforward. First, you package all your code and dependencies into a single jar. Then, run the following code:
