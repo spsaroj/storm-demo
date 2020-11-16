@@ -174,6 +174,9 @@ A spout is a source of streams in a topology. Generally spouts will read tuples 
 - ```fail()``` - The tuple emitted by this Spout with the id identifier has failed to be fully processed.
 
 ### Saroj Paudel
+
+Video Link: [Click here to open video](https://use.vg/FlmxoM)
+
 #### Bolts
 Bolts are where all the processing in the topologies are done. All the processings like filtering, functions, aggregations, joins, talking to database etc. can be done in the bolts. If you want your topology to emit more than one streams, you can do in the bolt.
 ```execute()``` is the main and most important method in apache storm where you do the calculation and emit the values in the topology.
